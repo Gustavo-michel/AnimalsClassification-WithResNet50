@@ -1,13 +1,12 @@
 import pickle
 import tensorflow as tf
 import numpy as np
-import matplotlib as plt
+import plotly.express as px
+import streamlit as st
+st.config.set_option("server.maxUploadSize", 800)
+
 
 classes = {'cat': 0, 'dog': 1, 'elephant': 2, 'horse': 3, 'lion': 4}
-
-with open("test\Model\classificador_animals_Resnet.sav", 'rb') as m:
-    model = pickle.load(m)
-
 
 def preprocessing(data):
     data = tf.keras.preprocessing.image.load_img(data, target_size = (224, 224))
@@ -18,13 +17,17 @@ def preprocessing(data):
 
 def plotImage(image):
     image = tf.keras.preprocessing.image.load_img(image, target_size = (224, 224))
-    return plt.imshow(image)
+    return px.imshow(image)
 
 
 image = preprocessing('test\Data\inf\cat.jpg')
 imagePlot = plotImage('test\Data\inf\cat.jpg')
 
-prediction = model.predict(image).argmax()
-class_name = list({k for k in classes if classes[k]==prediction})[0]
+st.plotly_chart(imagePlot)
 
-print(class_name)
+with open("test\Model\classificador_animals_Resnet.sav", 'rb') as m:
+    model = pickle.load(m)
+
+
+# prediction = model.predict(image).argmax()
+# class_name = list({k for k in classes if classes[k]==prediction})[0]
