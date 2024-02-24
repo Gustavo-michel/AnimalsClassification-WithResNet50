@@ -4,7 +4,7 @@ Este projeto utiliza a arquitetura de rede neural ResNet50 para classificar imag
 
 ## Dataset
 
-O dataset utilizado neste projeto está disponível no Kaggle. Ele contém diversas imagens de animais que são usadas para treinar e testar o modelo de classificação. Você pode acessar o dataset aqui.[Animals](https://www.kaggle.com/datasets/antobenedetti/animals/data)
+O dataset utilizado neste projeto está disponível no Kaggle. Ele contém diversas imagens de animais, separados por 5 classes que são usadas para treinar e testar o modelo de classificação. Você pode acessar o dataset aqui. [Animals](https://www.kaggle.com/datasets/antobenedetti/animals/data)
 
 ## Modelo e Transfer Learning
 
