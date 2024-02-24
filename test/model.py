@@ -2,10 +2,6 @@ import pickle
 import tensorflow as tf
 import numpy as np
 import matplotlib as plt
-import zipfile
-
-with zipfile.ZipFile('test\Model\classificador_animals_Resnet.zip', 'r') as zip_ref:
-    zip_ref.extractall()
 
 classes = {'cat': 0, 'dog': 1, 'elephant': 2, 'horse': 3, 'lion': 4}
 
@@ -30,3 +26,5 @@ imagePlot = plotImage('test\Data\inf\cat.jpg')
 
 prediction = model.predict(image).argmax()
 class_name = list({k for k in classes if classes[k]==prediction})[0]
+
+print(class_name)
