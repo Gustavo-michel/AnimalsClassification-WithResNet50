@@ -25,9 +25,11 @@ imagePlot = plotImage('test\Data\inf\cat.jpg')
 
 st.plotly_chart(imagePlot)
 
-with open("test\Model\classificador_animals_Resnet.sav", 'rb') as m:
-    model = pickle.load(m)
 
+@st.cache(allow_output_mutation=True)
+def load_model():
+    model = pickle.load("test\Model\classificador_animals_Resnet.sav")
+    return model
 
 # prediction = model.predict(image).argmax()
 # class_name = list({k for k in classes if classes[k]==prediction})[0]
