@@ -9,21 +9,36 @@ classes = {'cat': 0, 'dog': 1, 'elephant': 2, 'horse': 3, 'lion': 4}
 
 option = st.selectbox(
     'How would aimal do you like test?',
-    ('Cat', 'Dog', 'Elephant', 'horse', 'lion'))
+    ('Cat', 'Dog', 'Elephant', 'horse', 'lion', 'custom'))
 
 st.write('You selected:', option)
 
+custom = False
 match option:
     case 'Cat':
         animal_path = 'src\Data\inf\cat.jpg'
+        custom = False
     case 'Dog':
         animal_path = 'src\Data\inf\dog.jpg'
+        custom = False
     case 'Elephant':
         animal_path = 'src\Data\inf\elephant.jpg'
+        custom = False
     case 'horse':
         animal_path = 'src\Data\inf\horse.jpg'
+        custom = False
     case 'lion':
         animal_path = 'src\Data\inf\lion.jpg'
+        custom = False
+    case 'custom':
+        custom = True
+
+if custom:
+    uploaded_file = st.file_uploader("Upload Images", type=["png","jpg","jpeg"])
+    if uploaded_file is not None:
+        file_details = {"filename":uploaded_file.name, "filetype":uploaded_file.type, "filesize":uploaded_file.size}
+        st.write(file_details)
+    animal_path = uploaded_file
 
 def preprocessing_images(data):
     data = tf.keras.preprocessing.image.load_img(data, target_size = (224, 224))
@@ -64,7 +79,7 @@ def create_model():
 # @st.cache(allow_output_mutation=True)
 def loading_model():
     model = create_model()
-    model.load_weights("src/Model/animals_resnet_weights.h5")
+    model.load_weights("src\Model\weights_animals_resnet.h5")
     return model
 
 with st.spinner("Loading Model...."):

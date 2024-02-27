@@ -20,3 +20,9 @@ Para carregar o modelo treinado, você pode usar a função `load_model` do Kera
 # Carrega os pesos já treinadados do modelo
 model = load_weights('caminho/para/o/weights_animals_Resnet.h5')
 ```
+
+## Acess the app
+In terminal:
+```
+streamlit run https://github.com/Gustavo-michel/AnimalsClassification-WithResNet50/blob/main/src/app.py
+```
