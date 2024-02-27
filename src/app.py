@@ -79,7 +79,7 @@ def create_model():
 # @st.cache(allow_output_mutation=True)
 def loading_model():
     model = create_model()
-    model.load_weights("src/Model/animals_resnet_weights.h5")
+    model.load_weights("src\Model\weights_animals_resnet.h5")
     return model
 
 with st.spinner("Loading Model...."):
