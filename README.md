@@ -15,13 +15,8 @@ O modelo de classificação é baseado na arquitetura ResNet50, uma rede neural 
 Para carregar o modelo treinado, você pode usar a função `load_model` do Keras. Aqui está um exemplo de como fazer isso:
 
 ```python
-from keras.models import load_model
+*Criação da base do modelo e compilção
 
-# Carrega o modelo
-model = load_model('caminho/para/o/classificador_animals_Resnet.sav')
-
-ou
-
-with open('caminho/para/o/classificador_animals_Resnet.sav', "rb") as m:
-    model = pickle.load(m)
+# Carrega os pesos já treinadados do modelo
+model = load_weights('caminho/para/o/weights_animals_Resnet.h5')
 ```
