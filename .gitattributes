@@ -1,1 +1,2 @@
 test/Model/classificador_animals_Resnet.sav filter=lfs diff=lfs merge=lfs -text
+*.h5 filter=lfs diff=lfs merge=lfs -text
