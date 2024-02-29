@@ -26,3 +26,8 @@ In terminal:
 ```
 streamlit run https://github.com/Gustavo-michel/AnimalsClassification-WithResNet50/blob/main/src/app.py
 ```
+
+## Preview
+![Captura de tela 2024-02-28 224039](https://github.com/Gustavo-michel/AnimalsClassification-WithResNet50/assets/127684360/f34ccb71-bbb8-4263-a27e-0afcf4650ada)
+
+![Captura de tela 2024-02-28 224105](https://github.com/Gustavo-michel/AnimalsClassification-WithResNet50/assets/127684360/70d9a3de-a6fc-4399-b96c-2e72e1116a8c)
