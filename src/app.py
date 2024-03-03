@@ -2,16 +2,46 @@ import tensorflow as tf
 import numpy as np
 import plotly.express as px
 import streamlit as st
+import io
 
 st.markdown("<h1 style='text-align: left; color: #00eeff;'>animal classifier (Demonstration)</h1>", unsafe_allow_html=True)
 
 classes = {'cat': 0, 'dog': 1, 'elephant': 2, 'horse': 3, 'lion': 4}
 
+option_weights = st.selectbox(
+    'Which model Weights would you like to test with?',
+    ('current','legacy', 'custom'))
+
+st.write(f'You selected: {option_weights} Weights')
+
+custom_weight = False
+match option_weights:
+    case 'current':
+        weight_path = 'src\Model\weights_animals_resnet.h5'
+        custom = False
+    case 'legacy':
+        weight_path = 'src\Model\weights_animals_resnet(old).h5'
+        custom = False
+    case 'custom':
+        st.write('IN DEVELOPMENT!')
+        # custom_weight = True
+        
+# if custom_weight:
+#     uploaded_weight = st.file_uploader("Upload Weights", type="h5")
+#     if uploaded_weight is not None:
+#         weight_bytes = uploaded_weight.read()
+#         weights = io.BytesIO(weight_bytes)
+#         file_details = {"filename":uploaded_weight.name, "filetype":uploaded_weight.type, "filesize":uploaded_weight.size}
+#         st.write(file_details)
+#     weight_path = weights
+
+
+
 option = st.selectbox(
-    'How would aimal do you like test?',
+    'Which animal would you like to test with?',
     ('Cat', 'Dog', 'Elephant', 'horse', 'lion', 'custom'))
 
-st.write('You selected:', option)
+st.write(f'You selected: {option} animal')
 
 custom = False
 match option:
@@ -79,16 +109,16 @@ def create_model():
 # @st.cache(allow_output_mutation=True)
 def loading_model():
     model = create_model()
-    model.load_weights("src\Model\weights_animals_resnet.h5")
+    model.load_weights(weight_path)
     return model
 
 with st.spinner("Loading Model...."):
     model = loading_model()
 
 
+with st.spinner("predicting the image...."):
+    prediction = model.predict(image_data).argmax(axis=1)
+    class_name = list({k for k in classes if classes[k]==prediction})[0]
 
-prediction = model.predict(image_data).argmax(axis=1)
-class_name = list({k for k in classes if classes[k]==prediction})[0]
-
-st.markdown("<h2 style='text-align: center; color: white;'>Predicted class name: </h2>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: green;'>{}</h3>".format(class_name), unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: white;'>Predicted class name: </h2>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: green;'>{}</h3>".format(class_name), unsafe_allow_html=True)
